@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { faqs } from '../data/site';
+---
+
+<BaseLayout
+  title="FAQ sobre perfiles de aluminio a medida | JIJU"
+  description="Preguntas frecuentes sobre aleaciones, perfiles personalizados, tratamientos de superficie, CNC y solicitudes de presupuesto a JIJU Aluminium."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h1>Preguntas frecuentes antes de solicitar perfiles de aluminio</h1>
+      <p>Respuestas rápidas para preparar una consulta técnica más completa.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <div class="grid two">
+        {faqs.map((item) => (
+          <article class="faq-item">
+            <h2>{item.q}</h2>
+            <p>{item.a}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

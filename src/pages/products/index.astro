@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import { productCategories } from '../../data/site';
+---
+
+<BaseLayout
+  title="Productos de aluminio a medida para España | JIJU"
+  description="Categorías de perfiles de aluminio JIJU: extrusión personalizada, puertas y ventanas, decoración, LED, nueva energía y perfiles en stock."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Productos</p>
+      <h1>Perfiles de aluminio para proyectos industriales y de construcción</h1>
+      <p>
+        Seleccione la categoría más cercana a su aplicación. Cada página resume usos, ventajas y datos que conviene enviar para preparar una cotización.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <SectionHeader
+        title="Categorías de producto"
+        text="JIJU fabrica perfiles de aluminio por plano, muestra o aplicación. Las categorías siguientes cubren productos personalizados, construcción, decoración, iluminación, nueva energía y perfiles estándar."
+      />
+      <div class="product-capability-strip">
+        <div>
+          <strong>Materiales</strong>
+          <span>6063 · 6061 · 6005 · 6082 · 6N01</span>
+        </div>
+        <div>
+          <strong>Procesos</strong>
+          <span>Extrusión · Anodizado · Pintura · CNC · Corte</span>
+        </div>
+        <div>
+          <strong>Datos para cotizar</strong>
+          <span>Plano · Acabado · Cantidad · Uso final · Destino</span>
+        </div>
+      </div>
+      <div class="grid three">
+        {productCategories.map((product) => (
+          <article class="product-card">
+            <img src={product.image} width="640" height="480" alt={product.alt} />
+            <h3>{product.title}</h3>
+            <p>{product.summary}</p>
+            <p>{product.overview}</p>
+            <ul class="tags">
+              {product.applications.map((item) => <li>{item}</li>)}
+            </ul>
+            <ul class="mini-list">
+              {product.materials.slice(0, 3).map((item) => <li>{item}</li>)}
+            </ul>
+            <a href={`/products/${product.slug}/`}>Ver detalles</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

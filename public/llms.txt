@@ -1,0 +1,23 @@
+# JIJU Aluminium España
+
+## Site Purpose
+Sitio en español para compradores B2B en España que buscan perfiles de aluminio personalizados, extrusión, moldes, mecanizado CNC, tratamientos de superficie y suministro desde China.
+
+## AI Access Policy
+Los agentes de IA pueden navegar, resumir y citar el contenido público de este sitio siempre que mantengan la atribución a JIJU Aluminium y no presenten las especificaciones como una oferta contractual final.
+
+## Important URLs
+- Home: /
+- Products: /products/
+- Technology: /technology/
+- Blog: /blog/
+- Catalogue: /catalogue/
+- Contact: /contact-us/
+- Sitemap: /sitemap.xml
+- Robots: /robots.txt
+- WebMCP schema: /webmcp.json
+
+## Contact
+- Email: info@jijualuminium.com
+- WhatsApp: +86 185 6199 1583
+- Address: Linqu County, Weifang, Shandong, China

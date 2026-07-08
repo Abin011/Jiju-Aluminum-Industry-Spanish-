@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { caseStudies } from '../data/site';
+---
+
+<BaseLayout
+  title="Casos y aplicaciones de perfiles de aluminio | JIJU"
+  description="Aplicaciones habituales de los perfiles de aluminio JIJU para construcción, maquinaria industrial, iluminación, decoración y nueva energía."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Casos</p>
+      <h1>Aplicaciones para compradores industriales y de construcción</h1>
+      <p>Los casos se presentan por sector para orientar la conversación técnica y acelerar la preparación de una oferta.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <div class="grid three">
+        {caseStudies.map((item) => (
+          <article class="case-card">
+            <p class="eyebrow">{item.sector}</p>
+            <h2>{item.title}</h2>
+            <p>{item.result}</p>
+            <a href="/contact-us/">Consultar aplicación</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

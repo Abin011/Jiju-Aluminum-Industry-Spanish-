@@ -1,0 +1,32 @@
+---
+import { site } from '../data/site';
+---
+
+<form class="contact-form" id="contact-form" data-webmcp-form="lead-capture" aria-label="Formulario de solicitud de presupuesto">
+  <div class="form-row">
+    <label for="name">Nombre</label>
+    <input id="name" name="name" type="text" autocomplete="name" required />
+  </div>
+  <div class="form-row">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" required />
+  </div>
+  <div class="form-row">
+    <label for="company">Empresa</label>
+    <input id="company" name="company" type="text" autocomplete="organization" />
+  </div>
+  <div class="form-row">
+    <label for="country">País</label>
+    <input id="country" name="country" type="text" autocomplete="country-name" value="España" />
+  </div>
+  <div class="form-row full">
+    <label for="product">Producto o aplicación</label>
+    <input id="product" name="product" type="text" required placeholder="Perfil a medida, puerta y ventana, LED, nueva energía..." />
+  </div>
+  <div class="form-row full">
+    <label for="requirements">Planos, especificaciones o mensaje</label>
+    <textarea id="requirements" name="message" rows="6" required></textarea>
+  </div>
+  <button type="submit">Solicitar presupuesto</button>
+  <p>También puede escribir a <a href={`mailto:${site.email}`}>{site.email}</a> o por <a href={site.whatsappUrl}>WhatsApp</a>.</p>
+</form>

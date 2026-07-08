@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { posts, productCategories } from '../../data/site';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const relatedProducts = productCategories.slice(0, 3);
+---
+
+<BaseLayout
+  title={`${post.title} | JIJU Aluminium`}
+  description={post.excerpt}
+  canonical={`/blog/${post.slug}/`}
+>
+  <article>
+    <section class="page-hero">
+      <div>
+        <p class="eyebrow">{post.category} · {post.date}</p>
+        <h1>{post.title}</h1>
+        <p>{post.excerpt}</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-inner split">
+        <div>
+          <h2>Demanda de búsqueda</h2>
+          <p>
+            Un comprador español que busca este tema normalmente quiere reducir riesgo: confirmar capacidad real de fábrica,
+            entender costes de molde, revisar acabados y saber qué información enviar para recibir una oferta comparable.
+          </p>
+          <h2>Análisis de competidores SERP</h2>
+          <p>
+            La mayoría de resultados explican el producto de forma genérica. Este artículo se enfoca en decisiones de compra:
+            aplicación, aleación, acabado, tolerancia, cantidad, embalaje y coordinación logística.
+          </p>
+          <h2>Puntos de ganancia informativa</h2>
+          <p>
+            Para obtener una cotización útil, prepare plano o muestra, uso final, cantidad anual estimada, acabado requerido,
+            estándar de inspección y destino. Esta información permite al fabricante revisar molde, extrusión y procesos posteriores.
+          </p>
+          <h2>Próximo paso</h2>
+          <p>
+            Si el proyecto incluye perfiles personalizados, envíe la sección del perfil y explique dónde se instalará.
+            JIJU puede revisar extrusión, superficie y mecanizado en una misma conversación.
+          </p>
+        </div>
+        <aside class="card">
+          <h2>Productos relacionados</h2>
+          {relatedProducts.map((product) => (
+            <p><a href={`/products/${product.slug}/`}>{product.title}</a></p>
+          ))}
+          <a class="button" href="/contact-us/">Solicitar presupuesto</a>
+        </aside>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

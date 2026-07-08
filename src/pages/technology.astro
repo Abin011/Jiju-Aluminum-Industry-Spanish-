@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { capabilities } from '../data/site';
+---
+
+<BaseLayout
+  title="Capacidades técnicas de extrusión y CNC | JIJU"
+  description="Capacidades técnicas de JIJU: apertura de moldes, extrusión de aluminio, anodizado, pintura en polvo, fluorocarbono, CNC y embalaje de exportación."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Capacidades</p>
+      <h1>Extrusión, tratamientos de superficie y mecanizado CNC en un mismo flujo</h1>
+      <p>
+        Una cadena de suministro integrada permite controlar tolerancia, acabado, mecanizado y embalaje antes del envío internacional.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <div class="grid two">
+        {capabilities.map((item) => (
+          <article class="card">
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="section-inner split">
+      <img
+        src="https://www.globealu.com/upload/globealu/upload/middle/1_category_CNCMachiningAluminium_1770275628.JPG"
+        width="600"
+        height="450"
+        alt="Mecanizado CNC de perfiles de aluminio para piezas industriales"
+      />
+      <div>
+        <h2>Información útil para una consulta técnica</h2>
+        <p>
+          Envíe sección o plano 2D/3D, aleación, temple, acabado superficial, longitud, tolerancias, cantidad estimada,
+          aplicación final y país de destino. Si el proyecto requiere ensamblaje, indique también puntos de taladrado,
+          fresado, corte y embalaje.
+        </p>
+        <a class="button" href="/contact-us/">Enviar requisitos</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import { site, nav } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+}
+
+const { title, description, canonical = Astro.url.pathname, structuredData } = Astro.props;
+const canonicalUrl = new URL(canonical, site.url).toString();
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="es_ES" />
+    <link rel="icon" href="/favicon.svg" />
+    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="JIJU Aluminium España inicio">
+        <span class="brand-mark">JIJU</span>
+        <span>Aluminium España</span>
+      </a>
+      <nav aria-label="Navegación principal">
+        {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="header-cta" href="/contact-us/">Solicitar presupuesto</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <section class="footer-grid" aria-label="Información de contacto">
+        <div>
+          <strong>{site.name}</strong>
+          <p>Fabricante de perfiles de aluminio a medida para compradores B2B en España y Europa.</p>
+        </div>
+        <div>
+          <strong>Contacto</strong>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href={site.whatsappUrl}>WhatsApp {site.whatsapp}</a>
+          <span>{site.address}</span>
+        </div>
+        <div>
+          <strong>Productos</strong>
+          <a href="/products/">Categorías de producto</a>
+          <a href="/technology/">Capacidades técnicas</a>
+          <a href="/catalogue/">Catálogo PDF</a>
+        </div>
+      </section>
+      <p class="copyright">© 2026 JIJU Aluminium. Sitio estático en español para consultas B2B.</p>
+    </footer>
+    <script>
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const formatNumber = (value) => new Intl.NumberFormat('es-ES').format(Math.round(value));
+
+      const animateCounter = (el) => {
+        const target = Number(el.dataset.count || 0);
+        const suffix = el.dataset.suffix || '';
+        if (!target || el.dataset.done === 'true') return;
+        el.dataset.done = 'true';
+        if (prefersReducedMotion) {
+          el.textContent = `${formatNumber(target)}${suffix}`;
+          return;
+        }
+        const duration = 1200;
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = `${formatNumber(target * eased)}${suffix}`;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          if (entry.target.classList.contains('stat')) {
+            const counter = entry.target.querySelector('.count-up');
+            if (counter) animateCounter(counter);
+          }
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('.reveal, .stat').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

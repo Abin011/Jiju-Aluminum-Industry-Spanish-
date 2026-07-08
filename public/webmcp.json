@@ -1,0 +1,32 @@
+{
+  "name": "jiju-aluminium-es-webmcp",
+  "version": "1.0.0",
+  "description": "AI-agent-readable schema for JIJU Aluminium Spain inquiry forms and public contact actions.",
+  "forms": [
+    {
+      "name": "lead-capture",
+      "selector": "form[data-webmcp-form='lead-capture']",
+      "purpose": "Submit a quotation request for aluminum profiles, extrusion, CNC machining or surface treatment.",
+      "requiredFields": ["name", "email", "product", "message"],
+      "expectedResult": "The sales team receives the inquiry details and can reply by email or WhatsApp."
+    }
+  ],
+  "tools": [
+    {
+      "name": "submit_contact_request",
+      "description": "Prepare and submit a contact or quotation request through the website form.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["name", "email", "product", "message"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "company": { "type": "string" },
+          "country": { "type": "string" },
+          "product": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

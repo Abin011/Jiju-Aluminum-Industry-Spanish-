@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { capabilities, stats } from '../data/site';
+---
+
+<BaseLayout
+  title="Sobre JIJU Aluminium | Fabricante de extrusión de aluminio"
+  description="Conozca a Shandong JIJU Aluminium: fabricante de perfiles de aluminio con extrusión, tratamientos de superficie, CNC y servicio B2B internacional."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Sobre nosotros</p>
+      <h1>Fabricación integrada de perfiles de aluminio desde 1994</h1>
+      <p>
+        JIJU Aluminium es una empresa de Shandong dedicada al desarrollo, producción y exportación de productos de aluminio para clientes industriales.
+      </p>
+    </div>
+  </section>
+  <section class="stats-grid" aria-label="Datos corporativos">
+    {stats.map((stat) => (
+      <div class="stat">
+        <strong>{stat.value}</strong>
+        <span>{stat.label}</span>
+      </div>
+    ))}
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div>
+        <h2>Un proveedor para extrusión, acabado y procesado</h2>
+        <p>
+          La fábrica integra líneas de extrusión, anodizado, electroforesis, pintura en polvo, mecanizado CNC,
+          corte, punzonado, soldadura y embalaje. Este enfoque ayuda a compradores B2B a reducir coordinación,
+          revisar calidad en origen y recibir piezas más cercanas al uso final.
+        </p>
+        <p>
+          Para el mercado español, el objetivo del sitio es facilitar consultas claras: planos, aleación, tratamiento,
+          aplicación, cantidad estimada y requisitos logísticos.
+        </p>
+      </div>
+      <img
+        src="https://www.globealu.com/upload/globealu/upload/middle/1_news_highannualoutputfastleadtimehowouraluminumprofilefactoryensuresstablebulksupply_1780049528.png"
+        width="600"
+        height="450"
+        alt="Capacidad de producción estable para suministro B2B de perfiles de aluminio"
+      />
+    </div>
+  </section>
+  <section class="section band">
+    <div class="section-inner">
+      <h2>Servicios principales</h2>
+      <div class="grid four">
+        {capabilities.map((item) => (
+          <article class="card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

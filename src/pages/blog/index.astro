@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { posts } from '../../data/site';
+---
+
+<BaseLayout
+  title="Blog sobre perfiles de aluminio y compras desde China | JIJU"
+  description="Guías en español para importar perfiles de aluminio, elegir proveedor, comparar tratamientos de superficie, CNC y moldes personalizados."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Blog</p>
+      <h1>Guías para comprar perfiles de aluminio desde China</h1>
+      <p>Contenido pensado para equipos de compras, ingeniería y desarrollo de producto en España.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <div class="grid three">
+        {posts.map((post) => (
+          <article class="post-card">
+            <p class="eyebrow">{post.category} · {post.date}</p>
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+            <a href={`/blog/${post.slug}/`}>Leer artículo</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

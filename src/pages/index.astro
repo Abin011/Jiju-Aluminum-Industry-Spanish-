@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { capabilities, caseStudies, posts, productCategories, site, stats } from '../data/site';
+---
+
+<BaseLayout
+  title="Fabricante de perfiles de aluminio a medida | JIJU Aluminium España"
+  description="JIJU fabrica perfiles de aluminio personalizados para compradores B2B en España: extrusión, moldes, CNC, anodizado, pintura en polvo y exportación."
+>
+  <section class="hero">
+    <div class="hero-stage">
+      <div class="hero-copy">
+        <p class="eyebrow">Fábrica B2B de productos de aluminio para España</p>
+        <h1>Perfiles y piezas de aluminio listos para compra industrial</h1>
+        <p>
+          JIJU integra moldes, extrusión, acabado superficial, mecanizado CNC y embalaje de exportación para entregar
+          perfiles de aluminio preparados para construcción, industria, iluminación y nueva energía.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="/contact-us/">Solicitar presupuesto</a>
+          <a class="button-secondary" href="/products/">Ver productos</a>
+        </div>
+        <ul class="hero-points" aria-label="Ventajas para compradores B2B">
+          <li>Molde personalizado</li>
+          <li>Acabado y CNC</li>
+          <li>Exportación B2B</li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <img
+          class="hero-image"
+          src="https://www.globealu.com/2025img/GlobeAlu-home-Customized-aluminum-profiles.jpg"
+          width="800"
+          height="977"
+          alt="Fábrica B2B de perfiles de aluminio con muestras de extrusión personalizadas"
+        />
+        <div class="hero-specs" aria-label="Datos rápidos de fabricación">
+          <span>6063 / 6061 / 6082</span>
+          <span>Anodizado · Pintura · CNC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-grid" aria-label="Capacidades de fabricación">
+    {stats.map((stat) => (
+      <div class="stat reveal">
+        <strong class="count-up" data-count={stat.count} data-suffix={stat.suffix ?? ''}>{stat.value}</strong>
+        <span>{stat.label}</span>
+      </div>
+    ))}
+  </section>
+
+  <section class="section reveal">
+    <div class="section-inner">
+      <SectionHeader
+        eyebrow="Productos"
+        title="Categorías principales de perfiles de aluminio"
+        text="La estructura de producto está pensada para compradores que necesitan comparar aplicación, acabado, mecanizado y plazo de suministro."
+      />
+      <div class="grid three">
+        {productCategories.map((product) => (
+          <article class="product-card">
+            <img src={product.image} width="640" height="480" alt={product.alt} />
+            <div>
+              <h3>{product.title}</h3>
+              <p>{product.summary}</p>
+              <ul class="tags">
+                {product.applications.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <a href={`/products/${product.slug}/`}>Ver categoría</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section band reveal">
+    <div class="section-inner split">
+      <SectionHeader
+        eyebrow="Proceso"
+        title="De plano técnico a perfil entregado"
+        text="Un flujo claro reduce errores antes de fabricar el molde y ayuda a proteger el coste total del proyecto."
+      />
+      <div class="grid two process">
+        {['Revisión de plano, muestra o aplicación final.', 'Confirmación de aleación, temple, acabado y tolerancia.', 'Extrusión, tratamiento de superficie y mecanizado CNC.', 'Inspección, embalaje de exportación y coordinación logística.'].map((step) => (
+          <article class="card">
+            <h3>{step}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-inner">
+      <SectionHeader
+        eyebrow="Capacidades"
+        title="Producción integrada para pedidos personalizados"
+        text="La ventaja para compras B2B es centralizar procesos que normalmente se coordinan con varios proveedores."
+      />
+      <div class="grid four">
+        {capabilities.map((item) => (
+          <article class="card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="inline-actions">
+        <a class="button-secondary" href="/technology/">Ver capacidades técnicas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band reveal">
+    <div class="section-inner">
+      <SectionHeader
+        eyebrow="Casos"
+        title="Aplicaciones habituales"
+        text="El sitio agrupa las consultas por sector para acelerar la conversación técnica con compradores españoles."
+      />
+      <div class="grid three">
+        {caseStudies.map((item) => (
+          <article class="case-card">
+            <p class="eyebrow">{item.sector}</p>
+            <h3>{item.title}</h3>
+            <p>{item.result}</p>
+          </article>
+        ))}
+      </div>
+      <div class="inline-actions">
+        <a class="button-secondary" href="/cases/">Ver casos y sectores</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <div class="section-inner">
+      <SectionHeader eyebrow="Blog" title="Guías para compras de aluminio desde China" />
+      <div class="grid three">
+        {posts.slice(0, 3).map((post) => (
+          <article class="post-card">
+            <p class="eyebrow">{post.category}</p>
+            <h3>{post.title}</h3>
+            <p>{post.excerpt}</p>
+            <a href={`/blog/${post.slug}/`}>Leer guía</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section band reveal">
+    <div class="section-inner split">
+      <div>
+        <p class="eyebrow">Consulta B2B</p>
+        <h2>Envíe su plano, muestra o lista de medidas</h2>
+      </div>
+      <div>
+        <p>
+          Para preparar una oferta más precisa, incluya aplicación, aleación, acabado, cantidad estimada, tolerancias y país de destino.
+          JIJU responde las solicitudes comerciales en torno a 24 horas laborables.
+        </p>
+        <div class="inline-actions">
+          <a class="button" href="/contact-us/">Solicitar presupuesto</a>
+          <a class="button-secondary" href={site.whatsappUrl}>WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Contactar fabricante de perfiles de aluminio | JIJU"
+  description="Contacte con JIJU Aluminium para solicitar presupuesto de perfiles de aluminio personalizados, extrusión, mecanizado CNC y acabados para España."
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Contacto</p>
+      <h1>Solicite presupuesto para perfiles de aluminio</h1>
+      <p>
+        Envíe plano, aplicación, cantidad, aleación y acabado. El equipo comercial responde las consultas de producto y precio en torno a 24 horas laborables.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div>
+        <h2>Datos de contacto</h2>
+        <p><strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><strong>WhatsApp:</strong> <a href={site.whatsappUrl}>{site.whatsapp}</a></p>
+        <p><strong>Dirección:</strong> {site.address}</p>
+        <h2>Para cotizar más rápido</h2>
+        <p>
+          Añada sección del perfil, material, tratamiento de superficie, longitud, tolerancia, cantidad por pedido,
+          cantidad anual prevista y destino. Si tiene muestras o fotos, describa la aplicación final.
+        </p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

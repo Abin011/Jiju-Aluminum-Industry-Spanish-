@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { capabilities, productCategories } from '../../data/site';
+
+export function getStaticPaths() {
+  return productCategories.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const relatedProducts = productCategories.filter((item) => item.slug !== product.slug).slice(0, 3);
+const detailSpecs = [
+  ['Aleaciones', product.materials.join(', ')],
+  ['Tratamientos', product.finishes.join(', ')],
+  ['Personalización', product.customOptions.slice(0, 4).join(', ')],
+  ['Aplicaciones', product.applications.join(', ')],
+  ['Información necesaria', product.buyerNotes.join('; ')],
+];
+const productionSteps = [
+  ['01', 'Revisión técnica', 'El equipo comprueba plano, muestra o aplicación para definir geometría, aleación, tolerancia y acabado.'],
+  ['02', 'Molde y extrusión', 'Se prepara el molde o utillaje necesario y se produce el perfil por extrusión según la sección aprobada.'],
+  ['03', 'Acabado y mecanizado', 'Se aplican anodizado, pintura, electroforesis, corte, taladrado, fresado o roscado según el pedido.'],
+  ['04', 'Inspección y embalaje', 'Se revisa dimensión, superficie y cantidad antes de preparar embalaje de exportación y documentación.'],
+];
+const productFaqs = [
+  {
+    question: `¿JIJU puede fabricar ${product.title.toLowerCase()} a partir de un plano?`,
+    answer: `Sí. JIJU puede revisar plano CAD, dibujo de sección, muestra física o requisitos de aplicación para definir geometría, aleación, tolerancia, acabado y proceso de fabricación antes de cotizar.`,
+  },
+  {
+    question: `¿Qué información se necesita para cotizar ${product.title.toLowerCase()}?`,
+    answer: `Para una oferta precisa conviene enviar: ${product.buyerNotes.join('; ')}. También ayuda indicar país de destino, volumen por pedido y previsión anual.`,
+  },
+  {
+    question: '¿Qué aleaciones de aluminio se pueden usar?',
+    answer: `Las opciones habituales para esta categoría incluyen ${product.materials.join(', ')}. La selección final depende de resistencia, peso, mecanizado, acabado y aplicación final.`,
+  },
+  {
+    question: '¿Qué acabados superficiales están disponibles?',
+    answer: `Los acabados disponibles para este tipo de producto incluyen ${product.finishes.join(', ')}. Se puede revisar color, textura y resistencia a corrosión según el entorno de uso.`,
+  },
+  {
+    question: '¿Se puede entregar con mecanizado CNC o corte a medida?',
+    answer: `Sí. Según el diseño, JIJU puede ofrecer opciones como ${product.customOptions.join(', ')} para reducir trabajo posterior en destino.`,
+  },
+  {
+    question: '¿Cómo se preparan los perfiles para exportación a España?',
+    answer: 'Los perfiles se protegen contra arañazos y golpes, se separan por referencia o lote y se preparan con embalaje apto para transporte internacional. Para perfiles largos o piezas mecanizadas se puede definir embalaje especial.',
+  },
+];
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: productFaqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title={`${product.title} | JIJU Aluminium España`}
+  description={`${product.summary} Servicio de fabricación, acabado y exportación para compradores B2B en España.`}
+  canonical={`/products/${product.slug}/`}
+  structuredData={faqStructuredData}
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Producto</p>
+      <h1>{product.title}</h1>
+      <p>{product.summary}</p>
+      <div class="inline-actions">
+        <a class="button" href="/contact-us/">Solicitar presupuesto</a>
+        <a class="button-secondary" href="/products/">Volver a productos</a>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div class="product-visual">
+        <img src={product.image} width="900" height="675" alt={product.alt} />
+        <div class="product-visual-caption">
+          <span>Fabricación B2B</span>
+          <span>Plano · Molde · Extrusión · Acabado</span>
+        </div>
+      </div>
+      <div>
+        <h2>Aplicaciones y datos de compra</h2>
+        <p>{product.overview}</p>
+        <ul class="tags">
+          {product.applications.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="product-summary-panel">
+          <div>
+            <strong>Tipo de pedido</strong>
+            <span>OEM / ODM / perfiles por plano</span>
+          </div>
+          <div>
+            <strong>Uso recomendado</strong>
+            <span>{product.applications.join(' · ')}</span>
+          </div>
+          <div>
+            <strong>Respuesta comercial</strong>
+            <span>Solicitud revisada con datos técnicos y cantidad estimada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <h2>Ficha técnica orientativa</h2>
+      <div class="spec-table" role="table" aria-label={`Ficha técnica de ${product.title}`}>
+        {detailSpecs.map(([label, value]) => (
+          <div class="spec-row" role="row">
+            <strong role="cell">{label}</strong>
+            <span role="cell">{value}</span>
+          </div>
+        ))}
+      </div>
+      <p class="table-note">
+        Los valores finales dependen del plano, aleación, temple, tolerancia, tratamiento superficial y volumen de compra.
+      </p>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="section-inner">
+      <h2>Especificaciones y opciones de fabricación</h2>
+      <div class="grid three">
+        <article class="card">
+          <h3>Materiales habituales</h3>
+          <ul class="spec-list">
+            {product.materials.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Acabados disponibles</h3>
+          <ul class="spec-list">
+            {product.finishes.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Opciones personalizadas</h3>
+          <ul class="spec-list">
+            {product.customOptions.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div>
+        <p class="eyebrow">Ejemplos</p>
+        <h2>Productos y aplicaciones relacionadas</h2>
+        <p>
+          Use estos ejemplos como referencia inicial. Si su diseño no aparece en la lista, JIJU puede revisarlo mediante plano,
+          muestra o requisitos de aplicación.
+        </p>
+        <ul class="tags">
+          {product.examples.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Checklist para comprador</h2>
+        <ul class="spec-list">
+          {product.buyerNotes.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="section-inner">
+      <h2>Flujo de fabricación</h2>
+      <div class="timeline-grid">
+        {productionSteps.map(([number, title, text]) => (
+          <article class="timeline-item">
+            <strong>{number}</strong>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div>
+        <p class="eyebrow">Calidad y entrega</p>
+        <h2>Control pensado para compras B2B</h2>
+        <p>
+          Antes del envío se revisan dimensiones críticas, apariencia de superficie, cantidad, protección por pieza o paquete
+          y compatibilidad del embalaje con transporte internacional. Para pedidos recurrentes, las referencias pueden
+          organizarse por plano, acabado, lote y destino.
+        </p>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <h3>Control de calidad</h3>
+          <ul class="spec-list">
+            <li>Inspección dimensional según plano aprobado</li>
+            <li>Revisión visual de acabado y color</li>
+            <li>Confirmación de corte, taladro o mecanizado</li>
+            <li>Separación por referencia, acabado y lote</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Embalaje de exportación</h3>
+          <ul class="spec-list">
+            <li>Protección contra arañazos y golpes</li>
+            <li>Paquetes identificados por producto o plano</li>
+            <li>Opciones para perfiles largos o piezas mecanizadas</li>
+            <li>Preparación para transporte marítimo o multimodal</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="section-inner">
+      <h2>Procesos disponibles</h2>
+      <div class="grid four">
+        {capabilities.map((item) => (
+          <article class="card">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <p class="eyebrow">FAQ</p>
+      <h2>Preguntas frecuentes sobre {product.title.toLowerCase()}</h2>
+      <div class="faq-grid">
+        {productFaqs.map((item) => (
+          <details class="faq-detail">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <h2>Productos relacionados</h2>
+      <div class="grid three">
+        {relatedProducts.map((item) => (
+          <article class="product-card">
+            <img src={item.image} width="640" height="480" alt={item.alt} />
+            <h3>{item.title}</h3>
+            <p>{item.summary}</p>
+            <a href={`/products/${item.slug}/`}>Ver producto relacionado</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner split">
+      <div>
+        <p class="eyebrow">Consulta</p>
+        <h2>Prepare una solicitud para {product.title.toLowerCase()}</h2>
+        <p>Incluya medidas, aleación, acabado, cantidad, tolerancia y destino. Si aún no tiene plano final, describa la aplicación.</p>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>
