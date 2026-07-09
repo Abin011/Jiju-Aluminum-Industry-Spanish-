@@ -2,6 +2,7 @@ export const site = {
   name: 'JIJU Aluminium España',
   legalName: 'Shandong JIJU Aluminium',
   url: 'https://es.jijualuminium.com',
+  globalUrl: 'https://jijualuminium.com/',
   email: 'info@jijualuminium.com',
   whatsapp: '+86 185 6199 1583',
   whatsappUrl: 'https://wa.me/8618561991583',

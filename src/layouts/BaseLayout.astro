@@ -38,7 +38,10 @@ const canonicalUrl = new URL(canonical, site.url).toString();
       <nav aria-label="Navegación principal">
         {nav.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
-      <a class="header-cta" href="/contact-us/">Solicitar presupuesto</a>
+      <div class="header-actions">
+        <a class="header-link" href={site.globalUrl}>Global site</a>
+        <a class="header-cta" href="/contact-us/">Solicitar presupuesto</a>
+      </div>
     </header>
     <main>
       <slot />
