@@ -7,15 +7,18 @@ Sitio en español para compradores B2B en España que buscan perfiles de alumini
 Los agentes de IA pueden navegar, resumir y citar el contenido público de este sitio siempre que mantengan la atribución a JIJU Aluminium y no presenten las especificaciones como una oferta contractual final.
 
 ## Important URLs
-- Home: /
-- Products: /products/
-- Technology: /technology/
-- Blog: /blog/
-- Catalogue: /catalogue/
-- Contact: /contact-us/
-- Sitemap: /sitemap.xml
-- Robots: /robots.txt
-- WebMCP schema: /webmcp.json
+- [Home](https://es.jijualuminium.com/)
+- [Products](https://es.jijualuminium.com/products/)
+- [Custom aluminum extrusion](https://es.jijualuminium.com/products/custom-aluminum-extrusion/)
+- [Aluminum window and door profiles](https://es.jijualuminium.com/products/aluminum-window-door-profiles/)
+- [LED aluminum profiles](https://es.jijualuminium.com/products/led-aluminum-profiles/)
+- [Technology](https://es.jijualuminium.com/technology/)
+- [Blog](https://es.jijualuminium.com/blog/)
+- [Catalogue](https://es.jijualuminium.com/catalogue/)
+- [Contact](https://es.jijualuminium.com/contact-us/)
+- [Sitemap](https://es.jijualuminium.com/sitemap.xml)
+- [Robots](https://es.jijualuminium.com/robots.txt)
+- [WebMCP schema](https://es.jijualuminium.com/webmcp.json)
 
 ## Contact
 - Email: info@jijualuminium.com
