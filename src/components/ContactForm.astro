@@ -38,6 +38,47 @@ import { site } from '../data/site';
     <label for="requirements">Planos, especificaciones o mensaje</label>
     <textarea id="requirements" name="message" rows="6" required></textarea>
   </div>
-  <button type="submit">Solicitar presupuesto</button>
+  <button type="submit" data-default-label="Solicitar presupuesto" data-sending-label="Enviando solicitud...">
+    Solicitar presupuesto
+  </button>
   <p>También puede escribir a <a href={`mailto:${site.email}`}>{site.email}</a> o por <a href={site.whatsappUrl}>WhatsApp</a>.</p>
 </form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const cooldownMs = 60 * 1000;
+  const storageKey = 'jiju-inquiry-last-submit';
+
+  const setSubmitDisabled = (disabled: boolean, label?: string) => {
+    if (!submitButton) return;
+
+    submitButton.disabled = disabled;
+    submitButton.textContent = label ?? submitButton.dataset.defaultLabel ?? 'Solicitar presupuesto';
+  };
+
+  const getRemainingCooldown = () => {
+    const lastSubmit = Number(window.localStorage.getItem(storageKey) ?? 0);
+    return Math.max(0, cooldownMs - (Date.now() - lastSubmit));
+  };
+
+  const updateCooldownState = () => {
+    const remaining = getRemainingCooldown();
+
+    if (remaining <= 0) {
+      setSubmitDisabled(false);
+      return;
+    }
+
+    const seconds = Math.ceil(remaining / 1000);
+    setSubmitDisabled(true, `Espere ${seconds}s para reenviar`);
+    window.setTimeout(updateCooldownState, 1000);
+  };
+
+  updateCooldownState();
+
+  form?.addEventListener('submit', () => {
+    window.localStorage.setItem(storageKey, String(Date.now()));
+    setSubmitDisabled(true, submitButton?.dataset.sendingLabel);
+  });
+</script>

@@ -124,6 +124,14 @@ a {
   transform: translateY(-2px);
 }
 
+.contact-form button:disabled {
+  cursor: not-allowed;
+  border-color: var(--muted);
+  background: var(--muted);
+  transform: none;
+  opacity: 0.78;
+}
+
 .button-secondary {
   display: inline-flex;
   align-items: center;
