@@ -47,7 +47,7 @@ import { site } from '../data/site';
 <script>
   const form = document.querySelector<HTMLFormElement>('#contact-form');
   const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
-  const cooldownMs = 60 * 1000;
+  const cooldownMs = 10 * 1000;
   const storageKey = 'jiju-inquiry-last-submit';
 
   const setSubmitDisabled = (disabled: boolean, label?: string) => {
