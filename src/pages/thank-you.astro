@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Consulta enviada | JIJU Aluminium"
+  description="Gracias por enviar su solicitud de presupuesto a JIJU Aluminium España."
+  canonical="/thank-you/"
+>
+  <section class="page-hero">
+    <div>
+      <p class="eyebrow">Consulta enviada</p>
+      <h1>Gracias por contactar con JIJU Aluminium</h1>
+      <p>
+        Hemos recibido su solicitud. El equipo comercial revisará los detalles técnicos y responderá por email en torno a 24 horas laborables.
+      </p>
+      <div class="hero-actions">
+        <a class="button-primary" href="/products/">Ver productos</a>
+        <a class="button-secondary" href={site.whatsappUrl}>WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

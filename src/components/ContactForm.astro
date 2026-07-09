@@ -2,7 +2,18 @@
 import { site } from '../data/site';
 ---
 
-<form class="contact-form" id="contact-form" data-webmcp-form="lead-capture" aria-label="Formulario de solicitud de presupuesto">
+<form
+  class="contact-form"
+  id="contact-form"
+  data-webmcp-form="lead-capture"
+  aria-label="Formulario de solicitud de presupuesto"
+  action="https://api.staticforms.dev/submit"
+  method="POST"
+>
+  <input type="hidden" name="apiKey" value="sf_70729816317ecbbc45e9f246" />
+  <input type="hidden" name="subject" value="Nueva consulta desde JIJU Aluminium España" />
+  <input type="hidden" name="replyTo" value="@" />
+  <input type="hidden" name="redirectTo" value={`${site.url}/thank-you/`} />
   <div class="form-row">
     <label for="name">Nombre</label>
     <input id="name" name="name" type="text" autocomplete="name" required />
