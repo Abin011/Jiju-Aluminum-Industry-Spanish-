@@ -114,6 +114,16 @@ a {
   font-weight: 700;
 }
 
+.contact-form button {
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  border-color: var(--accent-dark);
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+}
+
 .button-secondary {
   display: inline-flex;
   align-items: center;
